@@ -1,3 +1,8 @@
+/*
+    Пример создания Базовой конфигурации REST API с помощью RTK
+*/
+
+
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { IUserResponse } from 'interfaces/IUser'
 import { ILoginRequest } from 'interfaces/IAuth'

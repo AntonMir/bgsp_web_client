@@ -10,7 +10,8 @@ import { refresh } from 'store/auth/auth.actions'
 import { axiosApi } from 'axiosApi/axiosApi'
 // components
 import Layout from 'Layout'
-import Auth from 'pages/Auth';
+import Auth from 'pages/auth';
+import HomePage from 'pages/homePage';
 // styled
 import './App.css'
 
@@ -41,7 +42,8 @@ const App: React.FC = () => {
         return (
             <Routes>
                 <Route path="/" element={<Layout />}>
-                    <Route index element={<>
+                    <Route index element={<HomePage />}/>
+                    <Route path="user" element={<>
                         <button onClick={() => getUserData()}> getUserData </button>
                     </>}/>
                     <Route path="*" element={<Navigate replace to={`/`} />}/>
@@ -53,9 +55,10 @@ const App: React.FC = () => {
     return (
         <>
             <Routes>
-                <Route path="/*" element={<Layout />}>
+                <Route path="/" element={<Layout />}>
+                    <Route index element={<HomePage />}/>
                     <Route path="auth/*" element={<Auth />}/>
-                    <Route path="*" element={<Navigate replace to={'auth/*'} />} />
+                    <Route path="*" element={<Navigate replace to={'/'} />} />
                 </Route>
             </Routes>
         </>
