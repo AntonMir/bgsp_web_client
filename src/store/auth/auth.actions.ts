@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 // import { message } from "antd"
-import { AxiosError, AxiosResponse } from "axios"
+import { AxiosError } from "axios"
 import { axiosAuthApi } from "axiosApi/axiosApi"
 import { 
     ILogoutResponse, 

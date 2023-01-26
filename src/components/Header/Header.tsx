@@ -2,55 +2,35 @@ import React from 'react'
 // Redux
 import { useSelector } from 'react-redux'
 import type { RootState } from 'store/store'
+// import { store } from 'store/store'
+// import { logout } from 'store/auth/auth.actions'
 // components
 import LogOutBtn from './LogOutBtn'
-import CustomButton from '../../UI/Button'
-// ANTD
-import { LogoutOutlined } from '@ant-design/icons'
+import LogInBtn from './LogInBtn'
+import Navigation from './Navigation'
+import Logo from './Logo'
 // styled
 import styled from 'styled-components'
 
-type IProps = {}
 
-const Header: React.FC<IProps> = () => {
+const Header: React.FC = () => {
 
     // отслеживаем процесс изменения STATE
     const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated)
 
-    const handlerClick = () => {
-        console.log('click')
-    }
-
-    if(isAuthenticated) return (
-        <HeaderWrapper>
-            <LogOutBtn />
-        </HeaderWrapper>
-    )
-
     return (
         <HeaderWrapper>
-            {/* <Button className="headerBtn" >className="headerBtn" </Button> */}
-            <CustomButton
-                text='Кнопка'
-                icon={<LogoutOutlined/>}
-                onClick={handlerClick}
-            />
-            <CustomButton
-                text='Кнопка'
-                icon={<LogoutOutlined/>}
-                // onClick={}
-            />
-            <CustomButton
-                text='Кнопка'
-                icon={<LogoutOutlined/>}
-                // onClick={}
-            />
-            <CustomButton
-                text='Кнопка'
-                icon={<LogoutOutlined/>}
-                // onClick={}
-            />
-            <LogOutBtn />
+            <Logo/>
+            {isAuthenticated ? (
+                <>
+                    <Navigation />
+                    <LogOutBtn />
+                </>
+            ) : (
+                <>
+                    <LogInBtn />
+                </>
+            )}
         </HeaderWrapper>
     )
 }
@@ -59,21 +39,18 @@ const HeaderWrapper = styled.header`
     position: sticky;
     top: 0;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     padding: 0 1%;
     height: 60px;
     background-color: #000;
-    box-shadow: 0 0 10px #000 !important;
+    box-shadow: 0 0 10px #000;
     z-index: 9999;
-    @media (max-width: 440px) {
-        height: 80px;
-        padding: 0 5% 0 8%;
-    }
-`
 
-const Button = styled.div`
-    
+    @media (max-width: 440px) {
+        /* height: 80px;
+        padding: 0 5% 0 8%; */
+    }
 `
 
 export default Header

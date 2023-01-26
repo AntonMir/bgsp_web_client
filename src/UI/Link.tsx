@@ -1,27 +1,31 @@
 import React from 'react'
+// RRD
+import { Link } from 'react-router-dom'
 // styled
 import styled from 'styled-components'
 
-interface IButton {
+interface ILink {
+    to: string
     style?: object
     className?: string
     onClick?: () => void
     children?: React.ReactNode
 }
 
-const Button: React.FC<IButton> = ({ children, style, className, onClick }) => {
+const CustomLink: React.FC<ILink> = ({ to, style, className, onClick, children }) => {
 
     return (
-        <Btn style={style} className={className} onClick={onClick}>
+        <LinkStyle to={to} style={style} className={className} onClick={onClick}>
             {children}
-        </Btn>
+        </LinkStyle>
     )
 }
 
-const Btn = styled.div`
+const LinkStyle = styled(Link)`
     display: flex;
     gap: 5px;
     align-items: center;
+    text-decoration: none;
     padding: 0 15px;
     color: #ccc;
     cursor: pointer;
@@ -41,4 +45,4 @@ const Btn = styled.div`
     }
 `
 
-export default Button
+export default CustomLink
