@@ -8,7 +8,7 @@ import { LoginOutlined } from '@ant-design/icons'
 const LogInBtn: React.FC = () => {
 
     return (
-        <Link to="auth">
+        <Link to="auth" >
             <LoginOutlined/>
             Вход
         </Link>

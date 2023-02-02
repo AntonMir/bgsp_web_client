@@ -1,51 +1,82 @@
 import React from 'react'
 // Redux
-import { useSelector } from 'react-redux'
-import type { RootState } from 'store/store'
-// import { store } from 'store/store'
-// import { logout } from 'store/auth/auth.actions'
+import { useAppSelector } from 'hooks/redux.hooks'
 // components
 import LogOutBtn from './LogOutBtn'
 import LogInBtn from './LogInBtn'
 import Navigation from './Navigation'
 import Logo from './Logo'
+import Address from './Address'
+import WorkTime from './WorkTime'
+import TelephoneNum from './TelephoneNum'
+import ThemeSwitcher from './ThemeSwitcher'
+import GetCall from './GetCall'
+import User from './User'
 // styled
 import styled from 'styled-components'
 
 
 const Header: React.FC = () => {
 
-    // отслеживаем процесс изменения STATE
-    const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated)
+    // отслеживаем состояние Аутентификации пользователя
+    const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated)
 
+    // отслеживаем текущую цветовую тему приложения
+    const colorTheme = useAppSelector((state) => state.colorTheme.color)
+
+    // меняем стили в зависимости от темы
+    const backgroundStyle = colorTheme === 'dark' 
+        ? {
+            backgroundColor: '#000'
+        } : {
+            backgroundColor: '#fff'
+        }
+
+    
     return (
-        <HeaderWrapper>
-            <Logo/>
-            {isAuthenticated ? (
-                <>
-                    <Navigation />
-                    <LogOutBtn />
-                </>
-            ) : (
-                <>
-                    <LogInBtn />
-                </>
-            )}
-        </HeaderWrapper>
+        <Background style={backgroundStyle}>
+            <HeaderWrapper>
+                <Logo/>
+                <Address />
+                <WorkTime />
+                <TelephoneNum />
+                <GetCall />
+                {isAuthenticated ? (
+                    <>
+                        {/* <Navigation /> */}
+                        <User />
+                        <LogOutBtn />
+                    </>
+                ) : (
+                    <>
+                        <LogInBtn />
+                    </>
+                )}
+            </HeaderWrapper>
+
+            <ThemeSwitcher />
+        </Background>
     )
 }
 
-const HeaderWrapper = styled.header`
+const Background = styled.div`
     position: sticky;
     top: 0;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 1%;
-    height: 60px;
+    justify-content: center;
     background-color: #000;
     box-shadow: 0 0 10px #000;
-    z-index: 9999;
+    height: 100px;
+    z-index: 999;
+`
+
+const HeaderWrapper = styled.header`
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 5%;
 
     @media (max-width: 440px) {
         /* height: 80px;
