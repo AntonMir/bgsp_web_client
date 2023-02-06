@@ -14,7 +14,8 @@ const TelephoneNum: React.FC = () => {
             imgBlack={smartPhoneBlack}
             text={<a href="tel:88003337837">8-800-333-78-37</a>}
             description='Звонок по России бесплатный'
-            size='275'
+            width='270'
+
         />
     )
 }

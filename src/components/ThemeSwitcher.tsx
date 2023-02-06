@@ -51,9 +51,9 @@ const ThemeSwitcher: React.FC = () => {
 }
 
 const CustomSwitch = styled(Switch)`
-    position: absolute;
-    top: 0;
-    right: 0;
+    /* position: absolute; */
+    /* top: 0; */
+    /* right: 0; */
     margin: 5px;
     width: 80px;
     z-index: 9999999;

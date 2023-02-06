@@ -21,11 +21,13 @@ const GetCall: React.FC = () => {
             text='&larr; Заказать звонок'
             style={{
                 border: `2px solid`, 
-                height: '40%', 
+                height: '55%', 
                 padding: '0 20px',
+                margin: ' 7px 0',
                 borderRadius: '5px',
                 cursor: 'pointer'
             }}
+            imgSize='5'
             onClick={getCall}
         />
     )

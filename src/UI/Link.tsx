@@ -8,7 +8,7 @@ import styled from 'styled-components'
 
 interface ILink {
     to: string
-    style?: object
+    style?: React.CSSProperties
     className?: string
     onClick?: () => void
     children?: React.ReactNode
@@ -47,13 +47,7 @@ const LinkStyle = styled(Link)`
     user-select: none;
 
     :hover {
-        background-color: #1890ff;
-        color: #fff;
-    }
-
-    :active {
-        background-color: #10406d;
-        color: #ccc;
+        text-decoration: underline;
     }
 `
 

@@ -34,6 +34,7 @@ const User: React.FC = () => {
                 imgWhite={userWhite}
                 imgBlack={userBlack}
                 text={userData?.name}
+                imgSize='10'
             />
         </LinkStyled>
     )

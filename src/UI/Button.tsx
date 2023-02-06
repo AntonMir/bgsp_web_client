@@ -5,7 +5,7 @@ import { useAppSelector } from 'hooks/redux.hooks'
 import styled from 'styled-components'
 
 interface IButton {
-    style?: object
+    style?: React.CSSProperties
     className?: string
     onClick?: () => void
     children?: React.ReactNode
@@ -32,7 +32,6 @@ const Btn = styled.div<any>`
     display: flex;
     gap: 5px;
     align-items: center;
-    padding: 0 15px;
     cursor: pointer;
     font-size: 16px;
     height: 100%;
@@ -40,13 +39,7 @@ const Btn = styled.div<any>`
     color: ${props => props.colorTheme === 'dark' ? '#fff' : '#000'};
 
     :hover {
-        background-color: #1890ff;
-        color: #fff;
-    }
-
-    :active {
-        background-color: #10406d;
-        color: #ccc;
+        text-decoration: underline;
     }
 `
 

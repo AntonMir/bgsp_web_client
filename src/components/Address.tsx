@@ -13,6 +13,7 @@ const Address: React.FC = () => {
             imgWhite={officeWhite}
             imgBlack={officeBlack}
             text='Москва, Коломенский проезд, дом 8, корпус 4'
+            width='270'
         />
     )
 }

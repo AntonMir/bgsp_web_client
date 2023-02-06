@@ -9,7 +9,13 @@ const HomePage: React.FC<IProps> = (props) => {
 
     
     return (
-        <Wrapper>HomePage</Wrapper>
+        <Wrapper>
+            Companies
+            <br/>
+            OurProjects
+            <br/>
+            OurClients
+        </Wrapper>
     )
 }
 
@@ -17,9 +23,8 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100vw;
-    height: calc(100vh - 100px);
     font-size: 50px; 
+    margin: 50px 0;
 `
 
 export default HomePage

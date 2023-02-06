@@ -5,7 +5,7 @@ import { useAppSelector } from 'hooks/redux.hooks'
 import styled from 'styled-components'
 
 interface IProps {
-    style?: object
+    style?: React.CSSProperties
     className?: string
     onClick?: () => void
     logoImg?: string
@@ -30,7 +30,7 @@ const Logotype: React.FC<IProps> = ({ style, className, onClick, logoImg, logoTi
             size={size}
             className={className} 
             onClick={onClick} 
-        >
+            >
             {/* Если картинки цветные, то у них нет разных вариантов (черная/белая), ставим в единсвтенном варианте */}
             {logoImg || logoTitle ? (
                 <>

@@ -2,24 +2,14 @@ import React from 'react'
 // Redux
 import { useAppSelector } from 'hooks/redux.hooks'
 // components
-import LogOutBtn from './LogOutBtn'
-import LogInBtn from './LogInBtn'
-import Navigation from './Navigation'
-import Logo from './Logo'
-import Address from './Address'
-import WorkTime from './WorkTime'
-import TelephoneNum from './TelephoneNum'
-import ThemeSwitcher from './ThemeSwitcher'
-import GetCall from './GetCall'
-import User from './User'
+import HeaderInfo from './Header.info'
+import HeaderAuth from './Header.auth'
+
 // styled
 import styled from 'styled-components'
 
 
 const Header: React.FC = () => {
-
-    // отслеживаем состояние Аутентификации пользователя
-    const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated)
 
     // отслеживаем текущую цветовую тему приложения
     const colorTheme = useAppSelector((state) => state.colorTheme.color)
@@ -35,52 +25,25 @@ const Header: React.FC = () => {
     
     return (
         <Background style={backgroundStyle}>
-            <HeaderWrapper>
-                <Logo/>
-                <Address />
-                <WorkTime />
-                <TelephoneNum />
-                <GetCall />
-                {isAuthenticated ? (
-                    <>
-                        {/* <Navigation /> */}
-                        <User />
-                        <LogOutBtn />
-                    </>
-                ) : (
-                    <>
-                        <LogInBtn />
-                    </>
-                )}
-            </HeaderWrapper>
-
-            <ThemeSwitcher />
+            <HeaderAuth/>
+            <HeaderInfo/>
         </Background>
     )
 }
 
 const Background = styled.div`
-    position: sticky;
-    top: 0;
+    /* position: sticky; */
+    /* top: 0; */
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     background-color: #000;
     box-shadow: 0 0 10px #000;
-    height: 100px;
     z-index: 999;
-`
+    padding: 10px 20px;
 
-const HeaderWrapper = styled.header`
-    display: flex;
-    gap: 15px;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 0 5%;
-
-    @media (max-width: 440px) {
-        /* height: 80px;
-        padding: 0 5% 0 8%; */
+    @media (max-width: 1500px) {
+        /* height: 170px; */
     }
 `
 
