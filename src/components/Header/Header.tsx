@@ -7,26 +7,19 @@ import HeaderAuth from './Header.auth'
 
 // styled
 import styled from 'styled-components'
+import Navigation from './Navigation'
 
 
 const Header: React.FC = () => {
 
     // отслеживаем текущую цветовую тему приложения
     const colorTheme = useAppSelector((state) => state.colorTheme.color)
-
-    // меняем стили в зависимости от темы
-    const backgroundStyle = colorTheme === 'dark' 
-        ? {
-            backgroundColor: '#000'
-        } : {
-            backgroundColor: '#fff'
-        }
-
     
     return (
-        <Background style={backgroundStyle}>
+        <Background className={colorTheme}>
             <HeaderAuth/>
             <HeaderInfo/>
+            <Navigation />
         </Background>
     )
 }
@@ -37,10 +30,9 @@ const Background = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #000;
     box-shadow: 0 0 10px #000;
     z-index: 999;
-    padding: 10px 20px;
+    padding: 10px 2%;
 
     @media (max-width: 1500px) {
         /* height: 170px; */

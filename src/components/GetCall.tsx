@@ -6,8 +6,11 @@ import phoneWhite from 'assets/global/phoneWhite.svg'
 import phoneBlack from 'assets/global/phoneBlack.svg' 
 import { message } from 'antd'
 
+interface IProps {
+    style?: React.CSSProperties
+}
 
-const GetCall: React.FC = () => {
+const GetCall: React.FC<IProps> = ({style}) => {
 
     const getCall = () => {
         console.log('getCall')
@@ -18,14 +21,15 @@ const GetCall: React.FC = () => {
         <InfoBlock
             imgWhite={phoneWhite}
             imgBlack={phoneBlack}
-            text='&larr; Заказать звонок'
+            text='&larr; Тех поддержка'
             style={{
                 border: `2px solid`, 
                 height: '55%', 
                 padding: '0 20px',
                 margin: ' 7px 0',
                 borderRadius: '5px',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                ...style
             }}
             imgSize='5'
             onClick={getCall}

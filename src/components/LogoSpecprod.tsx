@@ -17,7 +17,7 @@ const Logo: React.FC = () => {
             logoTitleWhite={logoTitleWhite}
             logoTitleBlack={logoTitleBlack}
             size={50}
-            style={{padding: '0 0 30px 0'}}
+            style={{padding: '20px 0 30px 0'}}
         />
     )
 }

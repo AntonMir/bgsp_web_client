@@ -22,7 +22,7 @@ const InfoBlock: React.FC<IProps> = ({imgWhite, imgBlack, text, description, wid
     const colorTheme = useAppSelector((state) => state.colorTheme.color)
 
     return (
-        <Wrapper style={style} onClick={onClick} width={width} colorTheme={colorTheme} > 
+        <Wrapper style={style} onClick={onClick} width={width} className={colorTheme}> 
             <Img src={colorTheme === 'dark' ? imgWhite : imgBlack} alt="img" imgSize={imgSize}/>
             <Text>
                 {text}
@@ -38,13 +38,12 @@ const Wrapper = styled.div<any>`
     align-items: center;
     gap: 10px;
     max-width: ${props => props.width ? props.width + 'px' : 'auto'};
-    color: ${props => props.colorTheme === 'dark' ? '#fff' : '#000'};
-    border: 0 solid ${props => props.colorTheme === 'dark' ? '#fff' : '#000'};
     user-select: none;
     width: max-content;
 `
 
 const Text = styled.p`
+    font-size: calc(0.10vw + 12px);
     user-select: auto;
     a {
         text-decoration: none;
@@ -56,7 +55,7 @@ const Text = styled.p`
 
     
     @media (max-width: 1500px) {
-        text-align: center;
+        /* text-align: center; */
     }
 `
 const Img = styled.img<any>`

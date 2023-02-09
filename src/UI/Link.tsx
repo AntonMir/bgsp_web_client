@@ -9,12 +9,11 @@ import styled from 'styled-components'
 interface ILink {
     to: string
     style?: React.CSSProperties
-    className?: string
     onClick?: () => void
     children?: React.ReactNode
 }
 
-const CustomLink: React.FC<ILink> = ({ to, style, className, onClick, children }) => {
+const CustomLink: React.FC<ILink> = ({ to, style, onClick, children }) => {
 
     // отслеживаем текущую цветовую тему приложения
     const colorTheme = useAppSelector((state) => state.colorTheme.color)
@@ -26,7 +25,7 @@ const CustomLink: React.FC<ILink> = ({ to, style, className, onClick, children }
                 ...style,
                 color: colorTheme === 'dark' ? '#fff' : '#000'
             }} 
-            className={className} 
+            className={colorTheme} 
             onClick={onClick}
         >
             {children}
@@ -42,7 +41,7 @@ const LinkStyle = styled(Link)`
     padding: 0 15px;
     color: #ccc;
     cursor: pointer;
-    font-size: 16px;
+    font-size: calc(0.10vw + 12px);
     height: 100%;
     user-select: none;
 

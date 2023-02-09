@@ -1,49 +1,49 @@
+import React from 'react'
+// components
 import Address from 'components/Address'
+import Email from 'components/Email'
 import GetCall from 'components/GetCall'
 import TelephoneNum from 'components/TelephoneNum'
+import TM from 'components/TM'
 import WorkTime from 'components/WorkTime'
-import React from 'react'
+import PrivacyPolicyBtn from 'components/PrivacyPolicyBtn'
+// UI
+import Title from 'UI/Title'
+// styled
 import styled from 'styled-components'
+
 
 type Props = {}
 
 const Contacts = (props: Props) => {
     return (
         <ContactsWrapper>
-            <Title>КОНТАКТНАЯ ИНФОРМАЦИЯ</Title>
+            <Title text="КОНТАКТНАЯ ИНФОРМАЦИЯ" />
             <Content>
                 <TelephoneNum />
+                <Email />
                 <Address />
                 <WorkTime />
-                <GetCall />
+                <GetCall style={{backgroundColor: '#cf747d'}} />
+                <TM />
+                <PrivacyPolicyBtn />
             </Content>
         </ContactsWrapper>
     )
 }
 
 const ContactsWrapper = styled.div`
-    border: 1px red solid;
-    height: 400px;
+    min-height: 400px;
     flex: 1;
-`
-
-const Title = styled.p`
-    font-size: calc(1vw + 20px);
-    margin: 0 0 50px 0;
 `
 
 const Content = styled.div`
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(255px, auto));
+    grid-auto-rows: 50px;
     align-items: center;
-    /* flex-wrap: wrap; */
-    /* gap: 50px; */
-    /* align-items: center; */
-
-    > * {
-        /* flex: 1; */
-        /* background-color: #ca5555; */
-    }
+    /* justify-content: center; */
+    gap: 10px;
 `
 
 export default Contacts

@@ -12,7 +12,7 @@ const TelephoneNum: React.FC = () => {
         <InfoBlock
             imgWhite={smartPhoneWhite}
             imgBlack={smartPhoneBlack}
-            text={<a href="tel:88003337837">8-800-333-78-37</a>}
+            text={<a href={`tel:${process.env.REACT_APP_PHONE}`}>{process.env.REACT_APP_PHONE}</a>}
             description='Звонок по России бесплатный'
             width='270'
 

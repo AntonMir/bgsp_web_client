@@ -6,12 +6,11 @@ import styled from 'styled-components'
 
 interface IButton {
     style?: React.CSSProperties
-    className?: string
     onClick?: () => void
     children?: React.ReactNode
 }
 
-const Button: React.FC<IButton> = ({ children, style, className, onClick }) => {
+const Button: React.FC<IButton> = ({ children, style, onClick }) => {
 
     // отслеживаем текущую цветовую тему приложения
     const colorTheme = useAppSelector((state) => state.colorTheme.color)
@@ -19,24 +18,22 @@ const Button: React.FC<IButton> = ({ children, style, className, onClick }) => {
     return (
         <Btn 
             style={style} 
-            className={className} 
+            className={colorTheme} 
             onClick={onClick}
-            colorTheme={colorTheme}
         >
             {children}
         </Btn>
     )
 }
 
-const Btn = styled.div<any>`
+const Btn = styled.div`
     display: flex;
     gap: 5px;
     align-items: center;
     cursor: pointer;
-    font-size: 16px;
+    font-size: calc(0.10vw + 12px);
     height: 100%;
     user-select: none;
-    color: ${props => props.colorTheme === 'dark' ? '#fff' : '#000'};
 
     :hover {
         text-decoration: underline;

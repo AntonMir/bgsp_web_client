@@ -71,14 +71,15 @@ const Section = styled.div`
 
 
     @media (max-width: 768px) {
-        flex-direction: column;
+        display: none;
+        /* flex-direction: column;
         align-items: center;
         width: auto;
         margin: 30px 0;
 
         &:nth-of-type(2n) {
             align-items: center;
-        }
+        } */
     }
 `
 

@@ -1,5 +1,5 @@
 interface ColorThemeState {
-    color: string | null | undefined
+    color: string | undefined
 }
 
 const initialState: ColorThemeState = { 
