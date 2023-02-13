@@ -56,7 +56,7 @@ const CustomSwitch = styled(Switch)`
     /* right: 0; */
     margin: 5px;
     width: 80px;
-    z-index: 9999999;
+    z-index: 999;
 
     .ant-switch-handle::before {
         background-color: #ccc;

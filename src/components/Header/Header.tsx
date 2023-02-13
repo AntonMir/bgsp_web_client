@@ -2,12 +2,12 @@ import React from 'react'
 // Redux
 import { useAppSelector } from 'hooks/redux.hooks'
 // components
-import HeaderInfo from './Header.info'
-import HeaderAuth from './Header.auth'
+import HeaderInfo from './header.info'
+import HeaderAuth from './header.auth'
 
 // styled
 import styled from 'styled-components'
-import Navigation from './Navigation'
+import HeaderNav from './header.nav'
 
 
 const Header: React.FC = () => {
@@ -19,7 +19,7 @@ const Header: React.FC = () => {
         <Background className={colorTheme}>
             <HeaderAuth/>
             <HeaderInfo/>
-            <Navigation />
+            <HeaderNav />
         </Background>
     )
 }

@@ -6,12 +6,12 @@ import { useSelector } from 'react-redux'
 import type { RootState } from 'store/store'
 import { store } from 'store/store'
 import { refresh } from 'store/auth/auth.actions'
-// axios
-import { axiosApi } from 'axiosApi/axiosApi'
 // components
 import Layout from 'Layout'
 import Auth from 'pages/auth';
 import HomePage from 'pages/homePage';
+import User from 'pages/user';
+import PrivacyPolicy from 'pages/privacyPolicy';
 // styled
 import './App.css'
 
@@ -21,12 +21,6 @@ const App: React.FC = () => {
     // отслеживаем процесс изменения STATE
     const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated)
 
-    const getUserData = async () => {
-        await axiosApi.get(`${process.env.REACT_APP_SERVER_URL}/api/user/profile`)
-        .then(response => {
-            console.log(response)
-        })
-    } 
 
     // если уходим со страницы на другую или перезагружаем ее, сразу пробуем получить новые токены
     useEffect(() => {
@@ -37,31 +31,26 @@ const App: React.FC = () => {
     }, [])
 
 
-    // если мы авторизованы, отдаем роуты пользователя иначе отдаем внешние роуты
-    if(isAuthenticated) {
-        return (
-            <Routes>
-                <Route path="/" element={<Layout />}>
-                    <Route index element={<HomePage />}/>
-                    <Route path="user" element={<>
-                        <button onClick={() => getUserData()}> getUserData </button>
-                    </>}/>
-                    <Route path="*" element={<Navigate replace to={`/`} />}/>
-                </Route>
-            </Routes>
-        )
-    }
 
     return (
-        <>
-            <Routes>
-                <Route path="/" element={<Layout />}>
-                    <Route index element={<HomePage />}/>
-                    <Route path="auth/*" element={<Auth />}/>
-                    <Route path="*" element={<Navigate replace to={'/'} />} />
-                </Route>
-            </Routes>
-        </>
+        <Routes>
+            <Route path="/" element={<Layout />}>
+                <Route index element={<HomePage />}/>
+                <Route path="privacy_policy" element={<PrivacyPolicy />}/>
+                {
+                    isAuthenticated 
+                    ? (
+                        // тут все страницы, доступные для авторизованного пользователя
+                        <Route path="user" element={<User/>}/>
+                    ) 
+                    : (
+                        // только страница авторизации 
+                        <Route path="auth/*" element={<Auth />}/>
+                    )
+                }
+                <Route path="*" element={<Navigate replace to={`/`} />}/>
+            </Route>
+        </Routes>
     )
 }
 

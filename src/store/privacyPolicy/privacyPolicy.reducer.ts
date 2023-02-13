@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit'
-import { visible, hidden } from 'store/privacyPolicy/privacyPolicy.actions'
+import { visible, hidden } from './privacyPolicy.actions'
 import initialState from './index'
 
 

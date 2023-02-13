@@ -1,28 +1,20 @@
 // ТМ - ТОРГОВАЯ МАРКА 
 
-import React, { useCallback } from 'react'
-// Redux
-import { useAppDispatch } from 'hooks/redux.hooks'
-import { visible } from 'store/privacyPolicy/privacyPolicy.actions'
+import React from 'react'
 // UI
 import Text from 'UI/Text'
 // styled
 import styled from 'styled-components'
+// react-router-dom
+import { Link } from 'react-router-dom'
 
 
 const PrivacyPolicyBtn: React.FC = () => {
 
-    const dispatch = useAppDispatch()
-
-    // Открыть Политика конфиденциальности и Пользовательское соглашение
-    const visiblePrivacyPolicy = useCallback(() => {
-        dispatch({type: visible.type})
-    }, [dispatch])
-
     return (
         <Text
             text={
-                <Button onClick={visiblePrivacyPolicy}>
+                <Button to='privacy_policy'>
                     <p>Политика конфиденциальности</p>
                     <p>Пользовательское соглашение</p>
                 </Button>
@@ -31,11 +23,16 @@ const PrivacyPolicyBtn: React.FC = () => {
     )
 }
 
-const Button = styled.span`
+const Button = styled(Link)`
     cursor: pointer;
+    text-decoration: none;
     
     > p {
         margin: 0;
+    }
+
+    :visited {
+        color: inherit;
     }
 
     :hover {
