@@ -18,7 +18,10 @@ type Props = {}
 const Contacts = (props: Props) => {
     return (
         <ContactsWrapper>
-            <Title text="КОНТАКТНАЯ ИНФОРМАЦИЯ" />
+            <Title 
+                text="КОНТАКТНАЯ ИНФОРМАЦИЯ"
+                align='left'
+            />
             <Content>
                 <TelephoneNum />
                 <Email />

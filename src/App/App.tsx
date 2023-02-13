@@ -38,8 +38,7 @@ const App: React.FC = () => {
                 <Route index element={<HomePage />}/>
                 <Route path="privacy_policy" element={<PrivacyPolicy />}/>
                 {
-                    isAuthenticated 
-                    ? (
+                    isAuthenticated ? (
                         // тут все страницы, доступные для авторизованного пользователя
                         <Route path="user" element={<User/>}/>
                     ) 
@@ -53,6 +52,7 @@ const App: React.FC = () => {
         </Routes>
     )
 }
+
 
 export default App;
 

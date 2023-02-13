@@ -13,17 +13,5 @@ code {
 }
   
 .h100 {
-    height: calc(100vh - 60px);
-}
-
-.dark {
-    color: #fff;
-    background-color: #111;
-    border: 0 solid #000;
-}
-
-.light {
-    color: #000;
-    background-color: #fff;
-    border: 0 solid #fff;
+    height: calc(100vh - 350px);
 }

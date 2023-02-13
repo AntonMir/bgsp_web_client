@@ -31,8 +31,8 @@ const Background = styled.div`
     flex-direction: column;
     align-items: center;
     box-shadow: 0 0 10px #000;
-    z-index: 999;
-    padding: 10px 2%;
+    /* z-index: 9999999; */
+    padding: 10px 2% 20px;
 
     @media (max-width: 1500px) {
         /* height: 170px; */

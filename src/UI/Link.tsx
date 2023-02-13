@@ -21,10 +21,7 @@ const CustomLink: React.FC<ILink> = ({ to, style, onClick, children }) => {
     return (
         <LinkStyle 
             to={to} 
-            style={{
-                ...style,
-                color: colorTheme === 'dark' ? '#fff' : '#000'
-            }} 
+            style={style} 
             className={colorTheme} 
             onClick={onClick}
         >
@@ -39,7 +36,6 @@ const LinkStyle = styled(Link)`
     align-items: center;
     text-decoration: none;
     padding: 0 15px;
-    color: #ccc;
     cursor: pointer;
     font-size: calc(0.10vw + 12px);
     height: 100%;

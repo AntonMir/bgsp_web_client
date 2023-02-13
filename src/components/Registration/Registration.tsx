@@ -7,7 +7,10 @@ import { store } from 'store/store'
 // interfaces
 import { IRegistrationRequest } from 'interfaces/IAuth'
 // ANTD
-import { Button, Form, Input, Alert } from 'antd'
+import { Button, Form, Alert } from 'antd'
+// UI
+import Input from 'UI/Input'
+import Title from 'UI/Title'
 // styled
 import styled from 'styled-components'
 
@@ -75,49 +78,41 @@ const Registration = () => {
     
     return (
         <Form>
-            <Title>Регистрация</Title>
-          
-            <FormInput
+            <Title text='Регистрация'/>
+
+            <Input 
                 label="Имя"
-                name="name"
-                rules={[{ required: true, message: 'Пожалуйста введите ваше Имя!' }]}
-            >
-                <Input type="text" name="name" onChange={changeUserData} />
-            </FormInput>
+                name="name" 
+                type="text"
+                required={true}
+                onChange={changeUserData}
+            />
+          
+            <Input 
+                label='Почта'
+                name="email" 
+                type="text"
+                required={true}
+                onChange={changeUserData}
+            />
 
-            <FormInput
-                label="Email"
-                name="email"
-                rules={[{ required: true, message: 'Пожалуйста введите Email!' }]}
-            >
-                <Input autoComplete="email" type="text" name="email" onChange={changeUserData} />
-            </FormInput>
+            <Input 
+                label='Пароль'
+                name="password" 
+                type="password"
+                required={true}
+                onChange={changeUserData}
+            />
 
-            <FormInput
-                label="Пароль"
-                name="password"
-                rules={[{ required: true, message: 'Пожалуйста введите пароль!' }]}
-            >
-                <Input.Password 
-                    type="password" 
-                    name="password" 
-                    onChange={changeUserData}
-                    autoComplete="new-password"
-                />
-            </FormInput>
+            {/* autoComplete="new-password" */}
 
-            <FormInput
+            <Input 
                 label="Повторите пароль"
                 name="confirmPassword"
-                rules={[{ required: true, message: 'Пожалуйста введите пароль повторно!' }]}
-            >
-                <Input.Password 
-                    autoComplete="new-password" 
-                    type="password" 
-                    name="confirmPassword" 
-                    onChange={changeUserData} 
-                />
-            </FormInput>
+                type="password"
+                required={true}
+                onChange={changeUserData}
+            />
 
             <FormBtn>
                 {error 
@@ -133,25 +128,9 @@ const Registration = () => {
     )
 }
 
-const Title = styled.h1`
-    text-align: center;
-    margin: 0 0 30px;
-`
-
-// фиксируем ширину поля ввода
-const FormInput = styled(Form.Item)`
-    .ant-form-item-row {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-    }
-    .ant-form-item-control {
-        max-width: 80%;
-    }
-`
-
 // ширина и отцентровка кнопки
 const FormBtn = styled(Form.Item)`
+    padding-top: 10px;
     display: flex;
     justify-content: center;
 `

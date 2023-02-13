@@ -25,7 +25,7 @@ const GetCall: React.FC<IProps> = ({style}) => {
             style={{
                 border: `2px solid`, 
                 height: '55%', 
-                padding: '0 20px',
+                padding: '0 20px 3px',
                 margin: ' 7px 0',
                 borderRadius: '5px',
                 cursor: 'pointer',

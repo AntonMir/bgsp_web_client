@@ -1,21 +1,23 @@
 import React, { useState } from 'react'
 // navigation
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 // interfaces
 import { ILoginRequest } from 'interfaces/IAuth'
 // Redux
 import { store } from 'store/store'
 import { login } from 'store/auth/auth.actions'
+// UI
+import Input from 'UI/Input'
+import Title from 'UI/Title'
 // ANTD
-import { Button, Form, Input, Alert } from 'antd'
+import { Button, Form, Alert } from 'antd'
 // styles
 import styled from 'styled-components'
 
 
 const Login: React.FC = () => {
 
-    const navigate = useNavigate()
-
+    // Данные для отправки
     const [form, setForm] = useState<ILoginRequest>({ email: '', password: '' })
 
     // текст ошибки с сервера
@@ -60,68 +62,49 @@ const Login: React.FC = () => {
         removeError()
         setForm({ ...form, [event.target.name]: event.target.value })
     }
-   
+  
     
     return (
-        <Form>
-            <Title>Авторизация</Title>
+            <Form >
+                <Title text='Авторизация'/>
 
-            <FormInput 
-                label="Email" 
-                name="email" 
-                rules={[{ required: true, message: 'Пожалуйста введите Email!' }]}
-            >
-                <Input type="text" name="email" onChange={changeUserData} />
-            </FormInput>
+                <Input 
+                    label='Почта'
+                    name="email" 
+                    type="text"
+                    required={true}
+                    onChange={changeUserData}
+                    />
 
-            <FormInput 
-                label="Пароль" 
-                name="password" 
-                rules={[{ required: true, message: 'Пожалуйста введите пароль!' }]}
-            >
-                <Input.Password 
-                    autoComplete="current-password"
-                    type="password" 
+                <Input 
+                    label='Пароль'
                     name="password" 
-                    onChange={changeUserData} 
-                />
-            </FormInput>
+                    type="password"
+                    required={true}
+                    onChange={changeUserData}
+                    />
 
-            <FormBtn>
-                {error 
-                    ? <Alert showIcon message={error} type="error" style={{maxHeight: 32}}/>
-                    : <Button type="primary" onClick={submitForm}>Войти</Button>
-                }
-            </FormBtn>
-            
-            <LinkWrapper>
-                <Link type="link" to="../registration">Нет аккаунта? Зарегистрируйтесь!</Link>
-            </LinkWrapper>
-        </Form>
+                <FormBtn>
+                    {error 
+                        ? <Alert showIcon message={error} type="error" style={{maxHeight: 32}}/>
+                        : <Button type="primary" onClick={submitForm}>Войти</Button>
+                    }
+                </FormBtn>
+                
+                <LinkWrapper>
+                    <Link type="link" to="../registration">Нет аккаунта? Зарегистрируйтесь!</Link>
+                </LinkWrapper>
+            </Form>
     )
 }
 
-const Title = styled.h1`
-    text-align: center;
-    margin-bottom: 30px;
-`
-
-// фиксируем ширину поля ввода
-const FormInput = styled(Form.Item)`
-    .ant-form-item-row {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-    }
-    .ant-form-item-control {
-        max-width: 80%;
-    }
-`
-
 // ширина и отцентровка кнопки
 const FormBtn = styled(Form.Item)`
+    padding-top: 10px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
 `
 
 // отцентровка текста ссылки

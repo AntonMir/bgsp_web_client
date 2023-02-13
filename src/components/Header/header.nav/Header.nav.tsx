@@ -2,7 +2,7 @@ import React from 'react'
 // UI
 import Link from 'UI/Link'
 // ANTD
-import { HomeOutlined, QuestionOutlined } from '@ant-design/icons'
+import { HomeOutlined, QuestionOutlined, OrderedListOutlined } from '@ant-design/icons'
 import styled from 'styled-components'
 
 
@@ -15,12 +15,12 @@ const Navigation: React.FC = () => {
                 Главная
             </Link>
             <Link to='/'>
-                <QuestionOutlined/>
-                Раздел - 1
+                <OrderedListOutlined/>
+                Новости
             </Link>
             <Link to='/'>
                 <QuestionOutlined/>
-                Раздел - 2
+                Раздел
             </Link>
         </Wrapper>
     )

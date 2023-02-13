@@ -10,11 +10,16 @@ const HomePage: React.FC<IProps> = (props) => {
     
     return (
         <Wrapper>
-            Companies
+            News
             <br/>
-            OurProjects
+            News
             <br/>
-            OurClients
+            News
+            <br/>
+            News
+            <br/>
+            News
+            <br/>
         </Wrapper>
     )
 }

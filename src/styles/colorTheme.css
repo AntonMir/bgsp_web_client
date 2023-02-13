@@ -1,0 +1,24 @@
+.dark {
+    color: #FFF;
+    background-color: #151515;
+    border: 0 solid #FFF;
+
+}
+
+.light {
+    color: #151515;
+    background-color: #FFF;
+    border: 0 solid #151515;
+}
+
+.background-dark {
+    color: #FFF;
+    background-color: #252525;
+    border: 0 solid #FFF;
+}
+
+.background-lignt {
+    color: #151515;
+    background-color: #FFF;
+    border: 0 solid #151515;
+}

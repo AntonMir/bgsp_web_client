@@ -7,9 +7,10 @@ import styled from 'styled-components'
 interface IProps {
     style?: React.CSSProperties
     text?: string
+    align?: string 
 }
 
-const Title: React.FC<IProps> = ({style, text}) => {
+const Title: React.FC<IProps> = ({style, text, align}) => {
 
     // отслеживаем текущую цветовую тему приложения
     const colorTheme = useAppSelector((state) => state.colorTheme.color)
@@ -18,6 +19,7 @@ const Title: React.FC<IProps> = ({style, text}) => {
         <TitleStyle
             style={style}
             className={colorTheme}
+            align={align}
         >
             {text}
         </TitleStyle>
@@ -25,8 +27,9 @@ const Title: React.FC<IProps> = ({style, text}) => {
 }
 
 const TitleStyle = styled.h1<any>`
-    font-size: calc(1.4vw + 14px);
-    margin: 0 0 30px 0;
+    text-align: ${props => props.align || 'center'} ;
+    font-size: calc(0.7vw + 18px);
+    margin: 0 0 20px 0;
     font-weight: 500;
 `
 
