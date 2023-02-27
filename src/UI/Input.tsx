@@ -14,12 +14,16 @@ interface IProps {
     required?: boolean
     style?: React.CSSProperties
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+    contextOfUse?: string
 }
 
-const CustomInput: React.FC<IProps> = ({label, name, type, required, style, onChange}) => {
+const CustomInput: React.FC<IProps> = ({label, name, type, required, style, onChange, contextOfUse}) => {
 
     // отслеживаем текущую цветовую тему приложения
     const colorTheme = useAppSelector((state) => state.colorTheme.color)
+
+    // если нам задают контекст использования, задаем соответствующий цветовой класс иначе задаем стандартный
+    const colorThemeClass = contextOfUse ? `${contextOfUse}-${colorTheme}` : colorTheme
 
     // состояние видимости пароля
     const [passwordVisible, setPasswordVisible] = useState(false);
@@ -31,10 +35,12 @@ const CustomInput: React.FC<IProps> = ({label, name, type, required, style, onCh
 
     return (
 
-        <InputStyle 
+        <InputWrapper 
             style={style}
-            className={colorTheme}
-            label={<p className={colorTheme}>{label}</p>} 
+            className={colorThemeClass}
+            label={
+                <p className={colorThemeClass}>{label}</p>
+            } 
             name={name}
             rules={[{ required: window.innerWidth > 450 ? required : false, message: `Поле не может быть пустым!` }]}
         > 
@@ -46,7 +52,7 @@ const CustomInput: React.FC<IProps> = ({label, name, type, required, style, onCh
                             type={!passwordVisible ? type : 'text'} 
                             name={name} 
                             onChange={onChange} 
-                            className={colorTheme}
+                            className={colorThemeClass}
                             style={{border: '1px solid'}}
                         />                                                   
                         <Eye onClick={changePassVisible}>
@@ -59,17 +65,17 @@ const CustomInput: React.FC<IProps> = ({label, name, type, required, style, onCh
                         type={type} 
                         name={name} 
                         onChange={onChange} 
-                        className={colorTheme}
+                        className={colorThemeClass}
                         style={{border: '1px solid'}}
                     />
                 )
             }
-        </InputStyle>
+        </InputWrapper>
 
     )
 }
 
-const InputStyle = styled(Form.Item)`
+const InputWrapper = styled(Form.Item)`
     .ant-form-item-row {
         display: flex;
         justify-content: space-between;
@@ -77,6 +83,8 @@ const InputStyle = styled(Form.Item)`
     .ant-form-item-control {
         max-width: 80%;
     }
+
+  
 
     @media (max-width: 450px) {
         .ant-form-item-row {

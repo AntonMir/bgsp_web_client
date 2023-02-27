@@ -25,7 +25,7 @@ const Footer: React.FC<IProps> = (props) => {
 
 const Background = styled.div`
     padding: 50px 2%;
-    box-shadow: 0 0 10px #000;
+    /* box-shadow: 0 0 10px #000; */
 `
 
 const FooterWrapper = styled.div`

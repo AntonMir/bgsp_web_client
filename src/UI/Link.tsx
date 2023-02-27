@@ -11,38 +11,45 @@ interface ILink {
     style?: React.CSSProperties
     onClick?: () => void
     children?: React.ReactNode
+    contextOfUse?: string
+    underline?: boolean
 }
 
-const CustomLink: React.FC<ILink> = ({ to, style, onClick, children }) => {
+const CustomLink: React.FC<ILink> = ({ to, style, onClick, children, contextOfUse, underline }) => {
 
     // отслеживаем текущую цветовую тему приложения
     const colorTheme = useAppSelector((state) => state.colorTheme.color)
+
+    // если нам задают контекст использования, задаем соответствующий цветовой класс иначе задаем стандартный
+    const colorThemeClass = contextOfUse ? `${contextOfUse}-${colorTheme}` : colorTheme
 
     return (
         <LinkStyle 
             to={to} 
             style={style} 
-            className={colorTheme} 
+            className={colorThemeClass} 
             onClick={onClick}
+            underline={underline}
         >
             {children}
         </LinkStyle>
     )
 }
 
-const LinkStyle = styled(Link)`
+const LinkStyle = styled(Link)<any>`
     display: flex;
     gap: 5px;
     align-items: center;
     text-decoration: none;
-    padding: 0 15px;
+    padding: 5px 15px;
     cursor: pointer;
     font-size: calc(0.10vw + 12px);
     height: 100%;
     user-select: none;
 
     :hover {
-        text-decoration: underline;
+        text-decoration: ${props => props.underline ? 'underline' : 'none'};
+        opacity: 0.8;
     }
 `
 

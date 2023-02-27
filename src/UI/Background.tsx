@@ -27,8 +27,7 @@ const Background: React.FC<IBackground> = ({ children, style}) => {
 const BackgroundStyled = styled.div`
     height: 100%;
     width: auto;
-    z-index: 999;
-    padding: 40px 20px;
+    box-shadow: inset 0 0 10px #000;
 `
 
 export default Background

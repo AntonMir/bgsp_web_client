@@ -1,0 +1,55 @@
+// цвета Регистрационной и Авторизационной форм
+
+// темная тема
+$dark_background_color: #494949;
+$dark_color: #fff;
+$dark_border: #fff;
+// светлая тема
+$light_background_color: #f3f3f3;
+$light_color: #151515;
+$light_border: #151515;
+
+// общие настройки
+$transition: all linear 0.1s;
+
+
+
+.auth-dark {
+    color: $dark_color;
+    background-color: $dark_background_color;
+    border: 0 solid $dark_border;
+    transition: $transition;
+
+    // убираем стандартное поведение автозаполнения input
+    :-webkit-autofill,
+    :-webkit-autofill:hover, 
+    :-webkit-autofill:focus, 
+    :-webkit-autofill:active {
+        box-shadow: 0 0 0 50px $dark_background_color inset !important;
+        -webkit-text-fill-color: $dark_color !important;
+    } 
+
+    ::after {
+        color: $dark_color;
+    }
+}
+
+.auth-light {
+    color: $light_color;
+    background-color: $light_background_color;
+    border: 0 solid $light_border;
+    transition: $transition;
+
+    // убираем стандартное поведение автозаполнения input
+    :-webkit-autofill,
+    :-webkit-autofill:hover, 
+    :-webkit-autofill:focus, 
+    :-webkit-autofill:active {
+        box-shadow: 0 0 0 50px $light_background_color inset !important;
+        -webkit-text-fill-color: $light_color !important;
+    }
+
+    ::after {
+        color: $light_color;
+    }
+}

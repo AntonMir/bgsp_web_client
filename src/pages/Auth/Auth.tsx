@@ -13,7 +13,7 @@ const Auth: React.FC = () => {
 
     return (
         <Row>
-            <Card>
+            <Card contextOfUse='auth'>
                 <Routes>
                     <Route path="/login" element={<Login />} key="/login" />
                     <Route path="/registration" element={<Registration />} key="/registration" />

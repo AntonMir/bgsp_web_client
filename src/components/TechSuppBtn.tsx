@@ -5,16 +5,21 @@ import InfoBlock from 'UI/InfoBlock'
 import phoneWhite from 'assets/global/phoneWhite.svg' 
 import phoneBlack from 'assets/global/phoneBlack.svg' 
 import { message } from 'antd'
+// Redux
+import { useAppDispatch, useAppSelector } from 'hooks/redux.hooks'
+import { close, open } from 'store/techSuppModal/techSuppModal.actions'
+
 
 interface IProps {
     style?: React.CSSProperties
 }
 
-const GetCall: React.FC<IProps> = ({style}) => {
+const TechSuppBtn: React.FC<IProps> = ({style}) => {
+
+    const dispatch = useAppDispatch()
 
     const getCall = () => {
-        console.log('getCall')
-        message.info('Звонок заказан')
+        dispatch({type: open.type})
     }
 
     return (
@@ -37,4 +42,4 @@ const GetCall: React.FC<IProps> = ({style}) => {
     )
 }
 
-export default GetCall
+export default TechSuppBtn

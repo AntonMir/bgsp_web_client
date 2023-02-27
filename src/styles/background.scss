@@ -1,0 +1,14 @@
+/* используется только для заднего фона приложения */
+.background-dark {
+    color: #FFF;
+    background-color: #313131;
+    border: 0 solid #FFF;
+    transition: all linear 0.1s;
+}
+
+.background-light {
+    color: #151515;
+    background-color: #ffffff;
+    border: 0 solid #151515;
+    transition: all linear 0.1s;
+}

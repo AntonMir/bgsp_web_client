@@ -2,7 +2,7 @@ import React from 'react'
 // components
 import Address from 'components/Address'
 import Email from 'components/Email'
-import GetCall from 'components/GetCall'
+import TechSuppBtn from 'components/TechSuppBtn'
 import TelephoneNum from 'components/TelephoneNum'
 import TM from 'components/TM'
 import WorkTime from 'components/WorkTime'
@@ -27,7 +27,7 @@ const Contacts = (props: Props) => {
                 <Email />
                 <Address />
                 <WorkTime />
-                <GetCall style={{backgroundColor: '#cf747d'}} />
+                <TechSuppBtn style={{backgroundColor: 'rgba(0,146,168, 0.9)'}} />
                 <TM />
                 <PrivacyPolicyBtn />
             </Content>

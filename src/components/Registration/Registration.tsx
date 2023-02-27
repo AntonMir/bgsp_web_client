@@ -7,10 +7,12 @@ import { store } from 'store/store'
 // interfaces
 import { IRegistrationRequest } from 'interfaces/IAuth'
 // ANTD
-import { Button, Form, Alert } from 'antd'
+import { Form, Alert } from 'antd'
 // UI
 import Input from 'UI/Input'
 import Title from 'UI/Title'
+import Button from 'UI/Button'
+import Text from 'UI/Text'
 // styled
 import styled from 'styled-components'
 
@@ -78,7 +80,7 @@ const Registration = () => {
     
     return (
         <Form>
-            <Title text='Регистрация'/>
+            <Title text='Регистрация' contextOfUse='auth'/>
 
             <Input 
                 label="Имя"
@@ -86,6 +88,7 @@ const Registration = () => {
                 type="text"
                 required={true}
                 onChange={changeUserData}
+                contextOfUse='auth'
             />
           
             <Input 
@@ -94,6 +97,7 @@ const Registration = () => {
                 type="text"
                 required={true}
                 onChange={changeUserData}
+                contextOfUse='auth'
             />
 
             <Input 
@@ -102,6 +106,7 @@ const Registration = () => {
                 type="password"
                 required={true}
                 onChange={changeUserData}
+                contextOfUse='auth'
             />
 
             {/* autoComplete="new-password" */}
@@ -112,17 +117,20 @@ const Registration = () => {
                 type="password"
                 required={true}
                 onChange={changeUserData}
+                contextOfUse='auth'
             />
 
             <FormBtn>
                 {error 
-                    ? <Alert showIcon message={error} type="error" style={{maxHeight: 32}}/>
-                    : <Button type="primary" onClick={submitForm}>Регистрация</Button>
+                    ? <Alert className='' showIcon message={error} type="error" style={{maxHeight: 32}}/>
+                    : <Button style={{border: '1px solid'}} contextOfUse='auth' border onClick={submitForm}>Регистрация</Button>
                 }
             </FormBtn>          
 
             <LinkWrapper>
-                <Link type="link" to="../login">Есть аккаунт? Войдите!</Link>
+                <Link type="link" to="../login">    
+                    <Text contextOfUse='auth' underline text='Есть аккаунт? Войдите!'/>
+                </Link>
             </LinkWrapper>
         </Form>
     )

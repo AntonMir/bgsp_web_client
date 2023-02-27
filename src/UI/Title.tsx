@@ -8,17 +8,21 @@ interface IProps {
     style?: React.CSSProperties
     text?: string
     align?: string 
+    contextOfUse?: string
 }
 
-const Title: React.FC<IProps> = ({style, text, align}) => {
+const Title: React.FC<IProps> = ({style, text, align, contextOfUse}) => {
 
     // отслеживаем текущую цветовую тему приложения
     const colorTheme = useAppSelector((state) => state.colorTheme.color)
 
+    // если нам задают контекст использования, задаем соответствующий цветовой класс иначе задаем стандартный
+    const colorThemeClass = contextOfUse ? `${contextOfUse}-${colorTheme}` : colorTheme
+
     return (
         <TitleStyle
             style={style}
-            className={colorTheme}
+            className={colorThemeClass}
             align={align}
         >
             {text}

@@ -6,7 +6,7 @@ import LogoSpecprod from 'components/LogoSpecprod'
 import Address from 'components/Address'
 import WorkTime from 'components/WorkTime'
 import TelephoneNum from 'components/TelephoneNum'
-import GetCall from 'components/GetCall'
+import TechSuppBtn from 'components/TechSuppBtn'
 // styled
 import styled from 'styled-components'
 
@@ -27,7 +27,7 @@ const Info: React.FC = () => {
 
             <Section>
                 <TelephoneNum />
-                <GetCall />
+                <TechSuppBtn />
             </Section>
                 
         </HeaderInfo>

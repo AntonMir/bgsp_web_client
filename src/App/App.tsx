@@ -9,9 +9,11 @@ import { refresh } from 'store/auth/auth.actions'
 // components
 import Layout from 'Layout'
 import Auth from 'pages/auth';
-import HomePage from 'pages/homePage';
+import News from 'pages/news';
 import User from 'pages/user';
 import PrivacyPolicy from 'pages/privacyPolicy';
+import Cookies from 'components/Cookies'
+import TechSuppForm from 'components/TechSuppForm'
 // styled
 import './App.css'
 
@@ -33,23 +35,28 @@ const App: React.FC = () => {
 
 
     return (
-        <Routes>
-            <Route path="/" element={<Layout />}>
-                <Route index element={<HomePage />}/>
-                <Route path="privacy_policy" element={<PrivacyPolicy />}/>
-                {
-                    isAuthenticated ? (
-                        // тут все страницы, доступные для авторизованного пользователя
-                        <Route path="user" element={<User/>}/>
-                    ) 
-                    : (
-                        // только страница авторизации 
-                        <Route path="auth/*" element={<Auth />}/>
-                    )
-                }
-                <Route path="*" element={<Navigate replace to={`/`} />}/>
-            </Route>
-        </Routes>
+        <>
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    <Route index element={<News />}/>
+                    <Route path="privacy_policy" element={<PrivacyPolicy />}/>
+                    {
+                        isAuthenticated ? (
+                            // тут все страницы, доступные для авторизованного пользователя
+                            <Route path="user" element={<User/>}/>
+                            ) 
+                            : (
+                                // только страница авторизации 
+                                <Route path="auth/*" element={<Auth />}/>
+                                )
+                            }
+                    <Route path="*" element={<Navigate replace to={`/`} />}/>
+                </Route>
+            </Routes>
+
+            <Cookies />
+            <TechSuppForm />
+        </>
     )
 }
 

@@ -9,8 +9,10 @@ import { login } from 'store/auth/auth.actions'
 // UI
 import Input from 'UI/Input'
 import Title from 'UI/Title'
+import Button from 'UI/Button'
+import Text from 'UI/Text'
 // ANTD
-import { Button, Form, Alert } from 'antd'
+import { Form, Alert } from 'antd'
 // styles
 import styled from 'styled-components'
 
@@ -66,7 +68,7 @@ const Login: React.FC = () => {
     
     return (
             <Form >
-                <Title text='Авторизация'/>
+                <Title text='Авторизация' contextOfUse='auth'/>
 
                 <Input 
                     label='Почта'
@@ -74,7 +76,8 @@ const Login: React.FC = () => {
                     type="text"
                     required={true}
                     onChange={changeUserData}
-                    />
+                    contextOfUse='auth'
+                />
 
                 <Input 
                     label='Пароль'
@@ -82,17 +85,20 @@ const Login: React.FC = () => {
                     type="password"
                     required={true}
                     onChange={changeUserData}
-                    />
+                    contextOfUse='auth'
+                />
 
                 <FormBtn>
                     {error 
                         ? <Alert showIcon message={error} type="error" style={{maxHeight: 32}}/>
-                        : <Button type="primary" onClick={submitForm}>Войти</Button>
+                        : <Button style={{border: '1px solid'}} contextOfUse='auth' border onClick={submitForm}>Войти</Button>
                     }
                 </FormBtn>
                 
                 <LinkWrapper>
-                    <Link type="link" to="../registration">Нет аккаунта? Зарегистрируйтесь!</Link>
+                    <Link type="link" to="../registration">
+                        <Text contextOfUse='auth' underline text='Нет аккаунта? Зарегистрируйтесь!'/>
+                    </Link>
                 </LinkWrapper>
             </Form>
     )
