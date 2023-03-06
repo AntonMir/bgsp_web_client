@@ -40,6 +40,7 @@ const authReducer = createReducer(initialState, (builder) => (
             // LOGIN 
             .addCase(login.fulfilled, (state, { payload }) => {
                 state.isAuthenticated = payload.data.isAuthenticated
+                state.role = payload.data.role
                 payload.message && message.success(payload.message)
             })
             .addCase(login.rejected, (state) => {
@@ -47,15 +48,15 @@ const authReducer = createReducer(initialState, (builder) => (
             })
             // LOGOUT
             .addCase(logout.fulfilled, (state, { payload }) => {
-                state.isAuthenticated = payload.data.isAuthenticated
+                state.isAuthenticated = payload.data.isAuthenticated || false
             })
             .addCase(logout.rejected, (state) => {
                 state.isAuthenticated = false
             })
             // REFRESH
             .addCase(refresh.fulfilled, (state, { payload }) => {
-                state.isAuthenticated = payload.data.isAuthenticated
-
+                state.isAuthenticated = payload.data.isAuthenticated || false
+                state.role = payload.data.role
             })
             .addCase(refresh.rejected, (state) => {
                 state.isAuthenticated = false

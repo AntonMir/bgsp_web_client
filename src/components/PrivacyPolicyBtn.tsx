@@ -2,7 +2,7 @@
 
 import React from 'react'
 // UI
-import Text from 'UI/Text'
+import Text from 'UI/InfoText'
 // styled
 import styled from 'styled-components'
 // react-router-dom

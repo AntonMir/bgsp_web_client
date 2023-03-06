@@ -38,8 +38,6 @@ const Login: React.FC = () => {
             const status = response.meta.requestStatus // статус ответа fulfilled - успех, rejected - ошибка
             const message: string | undefined = response.payload as string
 
-            console.log('Login_response', response)
-
             // если ошибка, запишем ее в state и покажем
             if(status === 'rejected' && message !== undefined) {
                 return setError(message) 

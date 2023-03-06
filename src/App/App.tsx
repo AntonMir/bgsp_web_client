@@ -11,6 +11,7 @@ import Layout from 'Layout'
 import Auth from 'pages/auth';
 import News from 'pages/news';
 import User from 'pages/user';
+import Admin from 'pages/admin';
 import PrivacyPolicy from 'pages/privacyPolicy';
 import Cookies from 'components/Cookies'
 import TechSuppForm from 'components/TechSuppForm'
@@ -21,7 +22,9 @@ import './App.css'
 const App: React.FC = () => {
 
     // отслеживаем процесс изменения STATE
-    const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated)
+    const auth = useSelector((state: RootState) => state.auth)
+
+    console.log('auth', auth)
 
 
     // если уходим со страницы на другую или перезагружаем ее, сразу пробуем получить новые токены
@@ -32,6 +35,27 @@ const App: React.FC = () => {
         store.dispatch(refresh(''))
     }, [])
 
+    // Для неавторизованных
+    const publicRoutes = (
+      <>
+        <Route path="auth/*" element={<Auth />}/>
+      </>
+    )
+    
+    // для авторизованных пользователей
+    const commonUsersRouters = (
+      <>
+        <Route path="user" element={<User/>}/>
+      </>
+    )
+    
+    // для админа
+    const adminRouters = (
+      <>
+        <Route path="user" element={<User/>}/>
+        <Route path="admin" element={<Admin/>}/>
+      </>
+    )
 
 
     return (
@@ -41,15 +65,13 @@ const App: React.FC = () => {
                     <Route index element={<News />}/>
                     <Route path="privacy_policy" element={<PrivacyPolicy />}/>
                     {
-                        isAuthenticated ? (
-                            // тут все страницы, доступные для авторизованного пользователя
-                            <Route path="user" element={<User/>}/>
-                            ) 
-                            : (
-                                // только страница авторизации 
-                                <Route path="auth/*" element={<Auth />}/>
-                                )
-                            }
+                      auth.isAuthenticated 
+                        // тут все страницы, доступные для авторизованного пользователя 
+                        ? auth.role === "ADMIN" 
+                          ? adminRouters 
+                          : commonUsersRouters
+                        : publicRoutes // для неавторизованных
+                    }
                     <Route path="*" element={<Navigate replace to={`/`} />}/>
                 </Route>
             </Routes>

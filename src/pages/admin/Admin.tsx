@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react'
 // Components
 import Post from 'components/Post'
+import AddNewPostForm from 'components/AddNewPostForm'
 // styled
 import styled from 'styled-components'
 // axios
 import { axiosNonAuthApi } from 'axiosApi/axiosApi'
+// UI
 import Button from 'UI/Button'
+// antd
+import { PlusOutlined, ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
 
 
 interface IPost {
@@ -17,11 +21,13 @@ interface IPost {
   img: string
 }
 
-const News: React.FC = () => {
+const Admin: React.FC = () => {
 
     const defaultNewsLength = 5
     const [data, setData] = useState<IPost[]>()
     const [listSize, setListSize] = useState<number>(defaultNewsLength)
+    const [addNewPostVisible, setAddNewPostVisible] = useState<boolean>(false)
+
 
         /**
      * Sorted news from date created or date updated
@@ -38,21 +44,36 @@ const News: React.FC = () => {
       return sortedNews
     }
 
-    useEffect(() => {
-      const getData = async () => {
-        try {
-          const response = await axiosNonAuthApi('/api/news')
-          setData(sortNewsFromDate(response.data))
-        } catch(error) {
-          console.log('Не удалось получить список новостей')
-        }
+    const getData = async () => {
+      try {
+        const response = await axiosNonAuthApi('/api/news')
+        setData(sortNewsFromDate(response.data))
+      } catch(error) {
+        console.log('Не удалось получить список новостей')
       }
-      
+    }
+
+    useEffect(() => {
       getData()
     }, [])
+
+    const hideNewPostForm = () => {
+      setAddNewPostVisible(false)
+    }
+
+    const showNewPostForm = () => {
+      setAddNewPostVisible(true)
+    }
     
     return (
-        <NewsWrapper>
+        <AdminWrapper>
+
+          { 
+            addNewPostVisible 
+              ? <AddNewPostForm closeForm={hideNewPostForm} />
+              : <Button style={{padding: '15px 0', marginBottom: '15px'}} onClick={showNewPostForm}><PlusOutlined /> Добавить пост</Button> 
+          }
+
           {
             data && data.length > 0 && data.map(post => {
               if(data.indexOf(post, 0) < listSize) {
@@ -64,7 +85,8 @@ const News: React.FC = () => {
                     text={post.text}
                     img={process.env.REACT_APP_SERVER_URL + '/' + post.img}
                     key={post.id}
-                    editing={false}
+                    editing={true}
+                    reloadNews={getData}
                   />
                 )
               } 
@@ -74,14 +96,14 @@ const News: React.FC = () => {
 
           { 
             data && data.length > listSize 
-              ? <Button onClick={() => setListSize(listSize + 5)}>Покзать больше</Button> 
-              : data && data.length > defaultNewsLength && <Button onClick={() => setListSize(5)}>Скрыть</Button>
+              ? <Button style={{padding: '15px 0'}} onClick={() => setListSize(listSize + 5)}><ArrowDownOutlined /> Покзать больше</Button> 
+              : data && data.length > defaultNewsLength && <Button style={{padding: '15px 0'}}  onClick={() => setListSize(5)}><ArrowUpOutlined /> Скрыть</Button>
           }
-        </NewsWrapper>
+        </AdminWrapper>
     )
 }
 
-const NewsWrapper = styled.div`
+const AdminWrapper = styled.div`
     display: flex;
     flex-direction: column;
     font-size: 50px; 
@@ -93,4 +115,4 @@ const NewsWrapper = styled.div`
 `
 
 
-export default News
+export default Admin

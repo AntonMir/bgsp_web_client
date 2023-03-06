@@ -43,6 +43,7 @@ const User: React.FC = () => {
 const LinkStyled = styled(Link)`
     height: 100%;
     text-decoration: none;
+    padding: 0 10px;
 `
 
 export default User

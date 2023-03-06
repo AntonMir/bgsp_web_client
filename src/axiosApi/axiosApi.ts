@@ -13,6 +13,16 @@ export const axiosAuthApi = axios.create({
     timeout: 5000,
 });
 
+// для аутентификации не нужно перезапрашивать токены в случае неудачи
+export const axiosNonAuthApi = axios.create({
+    baseURL: process.env.REACT_APP_SERVER_URL,
+    headers: {
+        'Content-Type': `application/json;charset=utf-8`
+    },
+    withCredentials: true,
+    timeout: 5000,
+});
+
 axiosAuthApi.interceptors.response.use(
 
     // 1 параметр - если все ок

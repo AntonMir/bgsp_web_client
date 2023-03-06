@@ -15,12 +15,8 @@ const Navigation: React.FC = () => {
                 Главная
             </Link>
             <Link to='/'>
-                <OrderedListOutlined/>
-                Новости
-            </Link>
-            <Link to='/'>
                 <QuestionOutlined/>
-                Раздел
+                Документы
             </Link>
         </Wrapper>
     )

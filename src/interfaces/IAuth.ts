@@ -7,6 +7,7 @@ export interface ILoginRequest {
 export interface ILoginResponse {
     message: string
     data: {
+        role: string | null
         isAuthenticated: boolean
     }
 }
@@ -38,5 +39,6 @@ export interface IRefreshRequest {}
 export interface IRefreshResponse {
     data: {
         isAuthenticated: boolean
+        role: string | null
     }
 }

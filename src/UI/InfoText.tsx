@@ -4,16 +4,14 @@ import { useAppSelector } from 'hooks/redux.hooks'
 // styled
 import styled from 'styled-components'
 
-interface IButton {
+interface IProps {
     style?: React.CSSProperties
-    onClick?: () => void
-    children?: React.ReactNode
-    border?: boolean
+    text?: string | React.ReactNode
     underline?: boolean
     contextOfUse?: string
 }
 
-const Button: React.FC<IButton> = ({ children, style, onClick, border, underline, contextOfUse }) => {
+const Text: React.FC<IProps> = ({style, text, underline, contextOfUse}) => {
 
     // отслеживаем текущую цветовую тему приложения
     const colorTheme = useAppSelector((state) => state.colorTheme.color)
@@ -22,38 +20,26 @@ const Button: React.FC<IButton> = ({ children, style, onClick, border, underline
     const colorThemeClass = contextOfUse ? `${contextOfUse}-${colorTheme}` : colorTheme
 
     return (
-        <Btn 
-            style={style} 
-            className={colorThemeClass} 
-            onClick={onClick}
-            border={border}
+        <TextStyle
+            style={style}
+            className={colorThemeClass}
             underline={underline}
         >
-            {children}
-        </Btn>
+            {text}
+        </TextStyle>
     )
 }
 
-const Btn = styled.div<any>`
+const TextStyle = styled.div<any>`
     display: flex;
-    gap: 5px;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: calc(0.10vw + 12px);
-    height: 100%;
-    user-select: none;
-    padding: 5px 15px;
-    border-radius: ${props => props.border ? '5px' : 0};
-
+    justify-content: flex-start;
+    font-size: calc(0.12vw + 14px);
+    font-weight: 400;
+    width: auto;
+    
     :hover {
         text-decoration: ${props => props.underline ? 'underline' : 'none'};
-        opacity: 0.6;
-    }
-
-    @media (max-width: 440px) {
-      padding: 5px 5px;
     }
 `
 
-export default Button
+export default Text

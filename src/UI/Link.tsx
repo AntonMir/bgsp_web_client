@@ -49,7 +49,11 @@ const LinkStyle = styled(Link)<any>`
 
     :hover {
         text-decoration: ${props => props.underline ? 'underline' : 'none'};
-        opacity: 0.8;
+        opacity: 0.6;
+    }
+
+    @media (max-width: 440px) {
+      padding: 5px 5px;
     }
 `
 

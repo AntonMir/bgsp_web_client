@@ -1,9 +1,11 @@
 interface AuthState {
     isAuthenticated: boolean
+    role: string | null
 }
 
 const initialState: AuthState = { 
-    isAuthenticated: false 
+    isAuthenticated: false,
+    role: null
 }
 
 export default initialState

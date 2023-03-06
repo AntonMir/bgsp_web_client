@@ -109,11 +109,16 @@ const TechSuppForm: React.FC = () => {
             onOk={handleOk}
             confirmLoading={confirmLoading}
             onCancel={handleCancel}
-            className={`tech_supp-${colorTheme}`}
-            footer={false}
+            className={`form-${colorTheme}`}
+            footer={
+              <Footer>
+                <Button style={{border: '1px solid'}} contextOfUse='form' border onClick={submitForm}>Отправить</Button>
+                <Button style={{border: '1px solid'}} contextOfUse='form' border onClick={closeModal}>Отмена</Button>
+              </Footer>
+            }
         >
-            <Form className={`tech_supp-${colorTheme}`}>
-                <Title text='Опишите ваш вопрос' contextOfUse='tech_supp'/>
+            <Form className={`form-${colorTheme}`}>
+                <Title text='Опишите ваш вопрос' contextOfUse='form'/>
 
                 <Input 
                     label='Имя'
@@ -121,7 +126,7 @@ const TechSuppForm: React.FC = () => {
                     type="text"
                     required={false}
                     onChange={changeUserData}
-                    contextOfUse='tech_supp'
+                    contextOfUse='form'
                 />
 
                 <Input 
@@ -130,21 +135,18 @@ const TechSuppForm: React.FC = () => {
                     type="text"
                     required={true}
                     onChange={changeUserData}
-                    contextOfUse='tech_supp'
+                    contextOfUse='form'
                 />
 
-               <TextArea
+                <TextArea
                     name='question'
                     placeholder='Введите ваш вопрос'
                     onChange={changeQuestion}
                     style={{minHeight: '150px'}}
-               />
+                />
 
                 <FormBtn>
-                    {error 
-                        ? <Alert showIcon message={error} type="error" style={{maxHeight: 32}}/>
-                        : <Button style={{border: '1px solid'}} contextOfUse='tech_supp' border onClick={submitForm}>Отправить</Button>
-                    }
+                  { error && <Alert showIcon message={error} type="error" style={{maxHeight: 32}}/>}
                 </FormBtn>
             </Form>
         </ModalStyled>
@@ -160,8 +162,10 @@ const ModalStyled = styled(Modal)`
         color: inherit;
     }
 
+    /* отключим крестик в левой верхенй части экрана
+    от не воспринимает стили родителя, и не меняет цвет в соответствии с темой */
     .ant-modal-close {
-        color: inherit;
+        display: none;
     }
 
     .ant-input {
@@ -174,9 +178,16 @@ const ModalStyled = styled(Modal)`
 const FormBtn = styled(Form.Item)`
     padding-top: 10px;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    flex-direction: column;
+    margin-bottom: 10px;
+`
+
+const Footer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
 `
 
 export default TechSuppForm;

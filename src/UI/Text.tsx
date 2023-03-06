@@ -33,10 +33,11 @@ const Text: React.FC<IProps> = ({style, text, underline, contextOfUse}) => {
 const TextStyle = styled.div<any>`
     display: flex;
     justify-content: flex-start;
-    font-size: calc(0.12vw + 14px);
+    font-size: calc(0.16vw + 16px);
+    line-height: 30px;
     font-weight: 400;
     width: auto;
-
+    
     :hover {
         text-decoration: ${props => props.underline ? 'underline' : 'none'};
     }
