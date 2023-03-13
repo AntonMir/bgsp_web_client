@@ -5,7 +5,7 @@ import AddNewPostForm from 'components/AddNewPostForm'
 // styled
 import styled from 'styled-components'
 // axios
-import { axiosNonAuthApi } from 'axiosApi/axiosApi'
+import { axiosBaseApi } from 'axiosApi/axiosApi'
 // UI
 import Button from 'UI/Button'
 // antd
@@ -46,7 +46,7 @@ const Admin: React.FC = () => {
 
     const getData = async () => {
       try {
-        const response = await axiosNonAuthApi('/api/news')
+        const response = await axiosBaseApi('/api/news')
         setData(sortNewsFromDate(response.data))
       } catch(error) {
         console.log('Не удалось получить список новостей')
@@ -70,7 +70,7 @@ const Admin: React.FC = () => {
 
           { 
             addNewPostVisible 
-              ? <AddNewPostForm closeForm={hideNewPostForm} />
+              ? <AddNewPostForm reloadNews={getData} closeForm={hideNewPostForm} />
               : <Button style={{padding: '15px 0', marginBottom: '15px'}} onClick={showNewPostForm}><PlusOutlined /> Добавить пост</Button> 
           }
 
@@ -81,7 +81,7 @@ const Admin: React.FC = () => {
                   <Post 
                     id={post.id}
                     title={post.title} 
-                    date={new Date(post.createdAt).toLocaleString()}
+                    date={post.createdAt}
                     text={post.text}
                     img={process.env.REACT_APP_SERVER_URL + '/' + post.img}
                     key={post.id}

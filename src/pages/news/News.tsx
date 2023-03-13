@@ -4,7 +4,7 @@ import Post from 'components/Post'
 // styled
 import styled from 'styled-components'
 // axios
-import { axiosNonAuthApi } from 'axiosApi/axiosApi'
+import { axiosApi } from 'axiosApi/axiosApi'
 import Button from 'UI/Button'
 
 
@@ -41,7 +41,7 @@ const News: React.FC = () => {
     useEffect(() => {
       const getData = async () => {
         try {
-          const response = await axiosNonAuthApi('/api/news')
+          const response = await axiosApi('/api/news')
           setData(sortNewsFromDate(response.data))
         } catch(error) {
           console.log('Не удалось получить список новостей')
@@ -50,7 +50,7 @@ const News: React.FC = () => {
       
       getData()
     }, [])
-    
+  
     return (
         <NewsWrapper>
           {
@@ -60,7 +60,7 @@ const News: React.FC = () => {
                   <Post 
                     id={post.id}
                     title={post.title} 
-                    date={new Date(post.createdAt).toLocaleString()}
+                    date={post.createdAt}
                     text={post.text}
                     img={process.env.REACT_APP_SERVER_URL + '/' + post.img}
                     key={post.id}

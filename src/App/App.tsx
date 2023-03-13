@@ -24,14 +24,12 @@ const App: React.FC = () => {
     // отслеживаем процесс изменения STATE
     const auth = useSelector((state: RootState) => state.auth)
 
-    console.log('auth', auth)
-
-
     // если уходим со страницы на другую или перезагружаем ее, сразу пробуем получить новые токены
+    // !только при перезагрузке
     useEffect(() => {
-        window.addEventListener('focus', () => {
-            store.dispatch(refresh(''))
-        })
+        // window.addEventListener('focus', () => {
+        //     store.dispatch(refresh(''))
+        // })
         store.dispatch(refresh(''))
     }, [])
 

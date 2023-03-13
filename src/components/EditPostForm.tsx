@@ -22,12 +22,15 @@ interface IForm {
   img: string | Blob | RcFile | UploadFile<any>
 }
 
-interface IAddNewPostForm {
+interface IEditPostForm {
+  id: string | number
+  title: string
+  text: string
   closeForm: () => void
   reloadNews: () => void
 }
 
-const AddNewPostForm: React.FC<IAddNewPostForm> = ({closeForm, reloadNews}) => {
+const EditPostForm: React.FC<IEditPostForm> = ({closeForm, reloadNews, title, text, id}) => {
 
 
   // Данные для отправки
@@ -45,9 +48,12 @@ const AddNewPostForm: React.FC<IAddNewPostForm> = ({closeForm, reloadNews}) => {
       if(!form.text) return message.error('Добавьте текст поста')
       if(!form.img) return message.error('Добавьте картинку')
 
-      const response = await axiosApi.post('/api/news', 
+      const response = await axiosApi.put('/api/news', 
         {
-          ...form,      
+          title: form.title,
+          text: form.text,
+          id: id,
+          img: form.img ? form.img : null      
         },
         {
           headers: {
@@ -73,14 +79,13 @@ const AddNewPostForm: React.FC<IAddNewPostForm> = ({closeForm, reloadNews}) => {
     setForm({ ...form, [event.target.name]: event.target.value })
   }
 
-  const onLoadFile = (file: string | Blob | RcFile | UploadFile<any>) => {
+  const onLoadFile = (file: string | Blob | RcFile) => {
     setForm({ ...form, 'img': file })
   }
  
 
   return (
     <Background >
-      
 
       <Wrapper className={`form-${colorTheme}`}>
 
@@ -91,29 +96,30 @@ const AddNewPostForm: React.FC<IAddNewPostForm> = ({closeForm, reloadNews}) => {
 
         <FormStyle>
 
-
-        <ImgInput 
-          onLoadFile={onLoadFile}
-        />
-
-        <FormText>
-          <TextArea 
-            placeholder='Заголовок'
-            name="title" 
-            onChange={changePostText}
+          <ImgInput 
+            onLoadFile={onLoadFile}
           />
 
-          <TextArea
-            name='text'
-            placeholder='Текст поста'
-            onChange={changePostText}
-            style={{minHeight: '125px'}}
-          />  
-        </FormText>
+          <FormText>
+            <TextArea 
+              placeholder='Заголовок'
+              name="title" 
+              onChange={changePostText}
+              defaultValue={title}
+            />
 
-        {/* <FormBtn>
-          { error && <Alert showIcon message={error} type="error" style={{maxHeight: 32}}/>}
-        </FormBtn> */}
+            <TextArea
+              name='text'
+              placeholder='Текст поста'
+              onChange={changePostText}
+              style={{minHeight: '125px'}}
+              defaultValue={text}
+            />  
+          </FormText>
+
+          {/* <FormBtn>
+            { error && <Alert showIcon message={error} type="error" style={{maxHeight: 32}}/>}
+          </FormBtn> */}
 
      
 
@@ -123,6 +129,7 @@ const AddNewPostForm: React.FC<IAddNewPostForm> = ({closeForm, reloadNews}) => {
           <Button border onClick={submitForm}>Отправить</Button>
           <Button border onClick={closeForm}>Отмена</Button>
         </Footer>
+
       </Wrapper>
       
     </Background>
@@ -177,4 +184,4 @@ const Footer = styled.div`
   gap: 20px;
 `
 
-export default AddNewPostForm;
+export default EditPostForm;

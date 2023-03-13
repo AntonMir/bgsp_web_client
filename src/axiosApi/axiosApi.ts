@@ -14,7 +14,7 @@ export const axiosAuthApi = axios.create({
 });
 
 // для аутентификации не нужно перезапрашивать токены в случае неудачи
-export const axiosNonAuthApi = axios.create({
+export const axiosBaseApi = axios.create({
     baseURL: process.env.REACT_APP_SERVER_URL,
     headers: {
         'Content-Type': `application/json;charset=utf-8`
@@ -89,7 +89,8 @@ axiosApi.interceptors.response.use(
                 // повторная попытка запроса
                 return await axiosApi.request(error.config)
             } else {
-                return await store.dispatch(logout(''))
+              console.log('ВЫШЛИ')
+              return await store.dispatch(logout(''))
             }
         } catch (error: any) {
             throw error

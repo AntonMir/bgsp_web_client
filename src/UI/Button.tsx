@@ -43,7 +43,7 @@ const Btn = styled.div<any>`
     font-size: calc(0.10vw + 12px);
     height: 100%;
     user-select: none;
-    padding: 5px 15px;
+    padding: 5px 15px 6.4px;
     border-radius: ${props => props.border ? '5px' : 0};
 
     :hover {
