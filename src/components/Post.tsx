@@ -12,7 +12,7 @@ import styled from 'styled-components'
 // import { Button } from 'antd'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 // axios
-import { axiosApi } from 'axiosApi/axiosApi'
+import { axiosPublickApi } from 'axiosApi/axiosApi'
 import EditPostForm from 'components/EditPostForm'
 
 interface IPost {
@@ -36,7 +36,7 @@ const Post: React.FC<IPost> = ({img, title, text, date, editing, id, reloadNews}
 
   const deletePost = async () => {
     try {
-      const response = await axiosApi(`/api/news?id=${id}`, {method: 'DELETE'})
+      const response = await axiosPublickApi(`/api/news?id=${id}`, {method: 'DELETE'})
       console.log(response.data)
       reloadNews && reloadNews()
     } catch(error) {
@@ -48,7 +48,7 @@ const Post: React.FC<IPost> = ({img, title, text, date, editing, id, reloadNews}
     return (
       <PostStyled className={colorTheme}>
         <Img>
-          {img ? <img src={img} alt='post.jpg'/> : <Spinner />}
+          {img ? <img src={process.env.REACT_APP_SERVER_URL + '/' + img} alt='post.jpg'/> : <Spinner />}
         </Img>
         <Info>
           <Title style={{marginBottom: 0}} text={title}/>
@@ -66,6 +66,7 @@ const Post: React.FC<IPost> = ({img, title, text, date, editing, id, reloadNews}
   } else {
     return (
       <EditPostForm 
+        img={img}
         id={id}
         title={title}
         text={text}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 // Redux
 import { useAppSelector } from 'hooks/redux.hooks'
 // ANTD
@@ -6,38 +6,43 @@ import { Form, message } from 'antd'
 // UI
 import Title from 'UI/Title'
 import Button from 'UI/Button'
-// img
-import blueArrow from 'assets/global/blue-arrow.svg'
 // styles
 import styled from 'styled-components'
 import TextArea from 'antd/es/input/TextArea';
 import ImgInput from 'UI/ImgInput';
-import { RcFile, UploadFile } from 'antd/es/upload';
 import { axiosApi } from 'axiosApi/axiosApi';
 
 
 interface IForm {
   title: string
   text: string
-  img: string | Blob | RcFile | UploadFile<any>
 }
 
 interface IEditPostForm {
   id: string | number
+  img: string
   title: string
   text: string
   closeForm: () => void
   reloadNews: () => void
 }
 
-const EditPostForm: React.FC<IEditPostForm> = ({closeForm, reloadNews, title, text, id}) => {
-
+const EditPostForm: React.FC<IEditPostForm> = ({closeForm, reloadNews, title, text, id, img}) => {
 
   // Данные для отправки
-  const [form, setForm] = useState<IForm>({ title: '', text: '', img: '' })
+  const [form, setForm] = useState<IForm>({ title: '', text: ''})
+  const [uploadedImg, setSelectedFile] = useState<File>()
 
   const colorTheme = useAppSelector((state) => state.colorTheme.color)
 
+  useEffect(() => {
+    setForm({...form, title, text})
+  }, [])
+
+
+  useEffect(() => {
+    console.log('form', form)
+  }, [form])
   /**
    * Отправка данных формы на сервер
    * и обработка ответа
@@ -46,27 +51,23 @@ const EditPostForm: React.FC<IEditPostForm> = ({closeForm, reloadNews, title, te
     try {
       if(!form.title) return message.error('Добавьте Заголовок')
       if(!form.text) return message.error('Добавьте текст поста')
-      if(!form.img) return message.error('Добавьте картинку')
 
-      const response = await axiosApi.put('/api/news', 
+      await axiosApi.put('/api/news', 
         {
-          title: form.title,
-          text: form.text,
-          id: id,
-          img: form.img ? form.img : null      
+          ...form,
+          img: uploadedImg ? uploadedImg : null
         },
         {
           headers: {
-            "Content-Type": "multipart/form-data",
-          },
+            'Content-Type': 'multipart/form-data'
+          }
         }
       )
+      .then(() => {
+        reloadNews()
+        closeForm()
+      })
 
-      console.log('response', response)
-      
-      reloadNews()
-      closeForm()
-      
     } catch(error) {
       return console.log(error)
     }
@@ -79,8 +80,9 @@ const EditPostForm: React.FC<IEditPostForm> = ({closeForm, reloadNews, title, te
     setForm({ ...form, [event.target.name]: event.target.value })
   }
 
-  const onLoadFile = (file: string | Blob | RcFile) => {
-    setForm({ ...form, 'img': file })
+  const handleFileChange = (event: any) => {
+    event.preventDefault()
+    setSelectedFile(event.target.files[0])
   }
  
 
@@ -90,14 +92,16 @@ const EditPostForm: React.FC<IEditPostForm> = ({closeForm, reloadNews, title, te
       <Wrapper className={`form-${colorTheme}`}>
 
         <Title 
-          text='Создание поста'
+          text='Редактирование поста'
           contextOfUse='form'
         />
 
         <FormStyle>
 
           <ImgInput 
-            onLoadFile={onLoadFile}
+            img={img}
+            onChange={handleFileChange}
+            uploadedImg={uploadedImg}
           />
 
           <FormText>
@@ -120,8 +124,6 @@ const EditPostForm: React.FC<IEditPostForm> = ({closeForm, reloadNews, title, te
           {/* <FormBtn>
             { error && <Alert showIcon message={error} type="error" style={{maxHeight: 32}}/>}
           </FormBtn> */}
-
-     
 
         </FormStyle>
 

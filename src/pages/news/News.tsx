@@ -4,7 +4,7 @@ import Post from 'components/Post'
 // styled
 import styled from 'styled-components'
 // axios
-import { axiosApi } from 'axiosApi/axiosApi'
+import { axiosPublickApi } from 'axiosApi/axiosApi'
 import Button from 'UI/Button'
 
 
@@ -41,7 +41,7 @@ const News: React.FC = () => {
     useEffect(() => {
       const getData = async () => {
         try {
-          const response = await axiosApi('/api/news')
+          const response = await axiosPublickApi('/api/news')
           setData(sortNewsFromDate(response.data))
         } catch(error) {
           console.log('Не удалось получить список новостей')
@@ -50,6 +50,7 @@ const News: React.FC = () => {
       
       getData()
     }, [])
+
   
     return (
         <NewsWrapper>
@@ -62,7 +63,7 @@ const News: React.FC = () => {
                     title={post.title} 
                     date={post.createdAt}
                     text={post.text}
-                    img={process.env.REACT_APP_SERVER_URL + '/' + post.img}
+                    img={post.img}
                     key={post.id}
                     editing={false}
                   />

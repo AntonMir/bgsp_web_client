@@ -25,7 +25,7 @@ const Background: React.FC<IBackground> = ({ children, style}) => {
 }
 
 const BackgroundStyled = styled.div`
-    height: 100%;
+    min-height: calc(100vh - 720px);
     width: auto;
     box-shadow: inset 0 0 10px #000;
 `

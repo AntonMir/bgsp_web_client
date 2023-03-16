@@ -13,15 +13,7 @@ export const axiosAuthApi = axios.create({
     timeout: 5000,
 });
 
-// для аутентификации не нужно перезапрашивать токены в случае неудачи
-export const axiosBaseApi = axios.create({
-    baseURL: process.env.REACT_APP_SERVER_URL,
-    headers: {
-        'Content-Type': `application/json;charset=utf-8`
-    },
-    withCredentials: true,
-    timeout: 5000,
-});
+
 
 axiosAuthApi.interceptors.response.use(
 
@@ -39,6 +31,16 @@ axiosAuthApi.interceptors.response.use(
         throw error
     }
 )
+
+// для аутентификации не нужно перезапрашивать токены в случае неудачи
+export const axiosPublickApi = axios.create({
+  baseURL: process.env.REACT_APP_SERVER_URL,
+  headers: {
+      'Content-Type': `application/json;charset=utf-8`
+  },
+  withCredentials: true,
+  timeout: 5000,
+});
 
 // для запросов любых данных кроме аутентификации
 export const axiosApi = axios.create({

@@ -5,7 +5,7 @@ import AddNewPostForm from 'components/AddNewPostForm'
 // styled
 import styled from 'styled-components'
 // axios
-import { axiosBaseApi } from 'axiosApi/axiosApi'
+import { axiosApi } from 'axiosApi/axiosApi'
 // UI
 import Button from 'UI/Button'
 // antd
@@ -46,7 +46,7 @@ const Admin: React.FC = () => {
 
     const getData = async () => {
       try {
-        const response = await axiosBaseApi('/api/news')
+        const response = await axiosApi('/api/news')
         setData(sortNewsFromDate(response.data))
       } catch(error) {
         console.log('Не удалось получить список новостей')
@@ -83,7 +83,7 @@ const Admin: React.FC = () => {
                     title={post.title} 
                     date={post.createdAt}
                     text={post.text}
-                    img={process.env.REACT_APP_SERVER_URL + '/' + post.img}
+                    img={post.img}
                     key={post.id}
                     editing={true}
                     reloadNews={getData}
