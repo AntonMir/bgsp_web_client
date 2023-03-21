@@ -102,7 +102,7 @@ const AddNewPostForm: React.FC<IAddNewPostForm> = ({closeForm, reloadNews}) => {
         </FormStyle>
 
         <Footer>
-          <Button border onClick={submitForm}>Отправить</Button>
+          <Button border onClick={submitForm}>Создать</Button>
           <Button border onClick={closeForm}>Отмена</Button>
         </Footer>
       </Wrapper>

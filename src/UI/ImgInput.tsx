@@ -1,4 +1,4 @@
-import React, { useRef, Ref, useState } from 'react';
+import React, { useRef, Ref, useState, useEffect } from 'react';
 // ANTD
 import { InboxOutlined } from '@ant-design/icons';
 // UI
@@ -20,6 +20,8 @@ interface IImgInput {
 
 const ImgInput: React.FC<IImgInput> = ({onChange, uploadedImg, img}) => {
 
+  const [newUploadedImg, setNewUploadedImg] = useState<string | null>(null)
+
   const filePicker: Ref<any> = useRef(null)
 
   const handlePick = () => {
@@ -35,8 +37,8 @@ const ImgInput: React.FC<IImgInput> = ({onChange, uploadedImg, img}) => {
       }
     })
     .then(resp => {
-      console.log('resp', resp)
       if(resp.status < 400) {
+        setNewUploadedImg(resp.data.fileName)
         onChange(event)
       }
     })
@@ -46,11 +48,18 @@ const ImgInput: React.FC<IImgInput> = ({onChange, uploadedImg, img}) => {
     })
   }
 
+
   return (
     <InputFileWrapper>
 
       <Button style={{height: '75%'}} onClick={handlePick}>
-        {img ? <Img src={process.env.REACT_APP_SERVER_URL + '/' + img} alt='post.jpg'/> : <InboxOutlined />}
+        {
+          newUploadedImg 
+            ? <Img src={process.env.REACT_APP_SERVER_URL + '/temp/' + newUploadedImg} alt='post.jpg'/> 
+            : img 
+              ? <Img src={process.env.REACT_APP_SERVER_URL + '/' + img} alt='post.jpg'/> 
+              : <InboxOutlined />
+        }
       </Button>
 
       <input 

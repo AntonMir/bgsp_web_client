@@ -23,26 +23,29 @@ const News: React.FC = () => {
     const [data, setData] = useState<IPost[]>()
     const [listSize, setListSize] = useState<number>(defaultNewsLength)
 
-        /**
-     * Sorted news from date created or date updated
-     * @param news 
-     * @returns IPost[]
-     */
-    function sortNewsFromDate(news:IPost[]) {
-      let sortedNews:IPost[] = []
-      sortedNews = news.sort((prewPost, nextPost) => {
-        const prewPostDate = Math.max(Date.parse(prewPost.createdAt), Date.parse(prewPost.updatedAt))
-        const nextPostDate = Math.max(Date.parse(nextPost.createdAt), Date.parse(nextPost.updatedAt))
-        return nextPostDate - prewPostDate        
-      })
-      return sortedNews
-    }
+    // /**
+    //  * Sorted news from date created or date updated
+    //  * @param news 
+    //  * @returns IPost[]
+    //  */
+    // function sortNewsFromDate(news:IPost[]) {
+    //   let sortedNews:IPost[] = []
+    //   sortedNews = news.sort((prewPost, nextPost) => {
+    //     // const prewPostDate = Math.max(Date.parse(prewPost.createdAt), Date.parse(prewPost.updatedAt))
+    //     // const nextPostDate = Math.max(Date.parse(nextPost.createdAt), Date.parse(nextPost.updatedAt))
+    //     const prewPostDate = Date.parse(prewPost.createdAt)
+    //     const nextPostDate = Date.parse(nextPost.createdAt)
+    //     return prewPostDate - nextPostDate        
+    //   })
+    //   return sortedNews
+    // }
 
     useEffect(() => {
       const getData = async () => {
         try {
           const response = await axiosPublickApi('/api/news')
-          setData(sortNewsFromDate(response.data))
+          // setData(sortNewsFromDate(response.data))
+          setData(response.data)
         } catch(error) {
           console.log('Не удалось получить список новостей')
         }

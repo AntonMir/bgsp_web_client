@@ -29,14 +29,14 @@ const User: React.FC = () => {
     
 
     return (
-        <LinkStyled to='user'>
-            <InfoBlock
-                imgWhite={userWhite}
-                imgBlack={userBlack}
-                text={userData?.name}
-                imgSize='10'
-            />
-        </LinkStyled>
+      <LinkStyled to='user'>
+        <InfoBlock
+            imgWhite={userWhite}
+            imgBlack={userBlack}
+            text={userData?.name}
+            imgSize='10'
+        />
+      </LinkStyled>
     )
 }
 

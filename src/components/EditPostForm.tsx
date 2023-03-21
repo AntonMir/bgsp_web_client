@@ -39,10 +39,6 @@ const EditPostForm: React.FC<IEditPostForm> = ({closeForm, reloadNews, title, te
     setForm({...form, title, text})
   }, [])
 
-
-  useEffect(() => {
-    console.log('form', form)
-  }, [form])
   /**
    * Отправка данных формы на сервер
    * и обработка ответа
@@ -55,6 +51,7 @@ const EditPostForm: React.FC<IEditPostForm> = ({closeForm, reloadNews, title, te
       await axiosApi.put('/api/news', 
         {
           ...form,
+          id,
           img: uploadedImg ? uploadedImg : null
         },
         {
@@ -128,7 +125,7 @@ const EditPostForm: React.FC<IEditPostForm> = ({closeForm, reloadNews, title, te
         </FormStyle>
 
         <Footer>
-          <Button border onClick={submitForm}>Отправить</Button>
+          <Button border onClick={submitForm}>Изменить</Button>
           <Button border onClick={closeForm}>Отмена</Button>
         </Footer>
 

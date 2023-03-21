@@ -29,25 +29,26 @@ const Admin: React.FC = () => {
     const [addNewPostVisible, setAddNewPostVisible] = useState<boolean>(false)
 
 
-        /**
-     * Sorted news from date created or date updated
-     * @param news 
-     * @returns IPost[]
-     */
-    function sortNewsFromDate(news:IPost[]) {
-      let sortedNews:IPost[] = []
-      sortedNews = news.sort((prewPost, nextPost) => {
-        const prewPostDate = Math.max(Date.parse(prewPost.createdAt), Date.parse(prewPost.updatedAt))
-        const nextPostDate = Math.max(Date.parse(nextPost.createdAt), Date.parse(nextPost.updatedAt))
-        return nextPostDate - prewPostDate        
-      })
-      return sortedNews
-    }
+    // /**
+    //  * Sorted news from date created or date updated
+    //  * @param news 
+    //  * @returns IPost[]
+    //  */
+    // function sortNewsFromDate(news:IPost[]) {
+    //   let sortedNews:IPost[] = []
+    //   sortedNews = news.sort((prewPost, nextPost) => {
+    //     const prewPostDate = Math.max(Date.parse(prewPost.createdAt), Date.parse(prewPost.updatedAt))
+    //     const nextPostDate = Math.max(Date.parse(nextPost.createdAt), Date.parse(nextPost.updatedAt))
+    //     return nextPostDate - prewPostDate        
+    //   })
+    //   return sortedNews
+    // }
 
     const getData = async () => {
       try {
         const response = await axiosApi('/api/news')
-        setData(sortNewsFromDate(response.data))
+        // setData(sortNewsFromDate(response.data))
+        setData(response.data)
       } catch(error) {
         console.log('Не удалось получить список новостей')
       }

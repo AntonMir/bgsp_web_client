@@ -36,11 +36,10 @@ const Post: React.FC<IPost> = ({img, title, text, date, editing, id, reloadNews}
 
   const deletePost = async () => {
     try {
-      const response = await axiosPublickApi(`/api/news?id=${id}`, {method: 'DELETE'})
-      console.log(response.data)
+      await axiosPublickApi(`/api/news?id=${id}`, {method: 'DELETE'})
       reloadNews && reloadNews()
     } catch(error) {
-      console.log('Не получилось удалить')
+      console.log(error, 'Не получилось удалить')
     }
   }
 

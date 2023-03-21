@@ -1,6 +1,7 @@
 import React from 'react'
 // axios
 import { axiosApi } from 'axiosApi/axiosApi'
+import Placeholder from 'UI/PlaceholderPage'
 
 
 type Props = {}
@@ -18,8 +19,9 @@ const User = (props: Props) => {
 
     return (
         <>
-            USER PAGE
-            <button onClick={() => getUserData()}> getUserData </button>
+            {/* USER PAGE
+            <button onClick={() => getUserData()}> getUserData </button> */}
+            <Placeholder />
         </>
     )
 }

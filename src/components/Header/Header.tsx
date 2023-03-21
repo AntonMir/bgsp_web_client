@@ -19,7 +19,7 @@ const Header: React.FC = () => {
         <Background className={colorTheme}>
             <HeaderAuth/>
             <HeaderInfo/>
-            <HeaderNav />
+            {/* <HeaderNav /> */}
         </Background>
     )
 }
